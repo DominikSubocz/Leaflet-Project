@@ -47,6 +47,11 @@ var polygon = L.polygon([
     [51.51, -0.047]
 ]).addTo(map);
 
+var markers = Array();
+
+
+
+
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 circle.bindPopup("I am a circle.");
 polygon.bindPopup("I am a polygon.");
@@ -57,8 +62,8 @@ var popup = L.popup()
     .openOn(map);
 
     function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
+        alert("You clicked the map at " + e.latlng);
+    }
 
 map.on('click', onMapClick);
 
@@ -69,7 +74,21 @@ function onMapClick(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
+        addMarker(e);
+
 }
+
+function addMarker(e){
+    // Add marker to map at click location; add popup window
+    var newMarker = new L.marker(e.latlng).addTo(map);
+    markers.push(newMarker.getLatLng());
+
+
+    var polyline = L.polyline(markers, {color: 'red'}).addTo(map);
+}
+
+
+
 
 map.on('click', onMapClick);
 
@@ -112,6 +131,13 @@ const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.pn
 });
 layerControl.addBaseLayer(openTopoMap, 'OpenTopoMap');
 layerControl.addOverlay(parks, 'Parks');
+
+var latlngs = [
+    [51.517503, -0.065789],
+    [51.521668,-0.046692]
+]; 
+// 4. 
+
 
     </script>
 </body>
