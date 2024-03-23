@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+<?php
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    
-    <title>Document</title>
-</head>
+require("classes/components.php");
+
+Components::pageHeader("Path", ["style"], ["mobile-nav"]);
+
+?>
+
 <style>
 
 #map { height: 180px; }
 
 
 </style>
-<body>
 
 <div id="map" style="width: 1500px; height: 600px;"></div>
 <script>
@@ -48,9 +40,7 @@ var polygon = L.polygon([
 ]).addTo(map);
 
 var markers = Array();
-
-
-
+      
 
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 circle.bindPopup("I am a circle.");
@@ -140,5 +130,3 @@ var latlngs = [
 
 
     </script>
-</body>
-</html>
