@@ -216,31 +216,6 @@ input:not(input.button) {
   text-align: center;
 }
 
-/* ORDERS */
-.order-group {
-  border: 2px solid black;
-  margin-bottom: 32px;
-}
-
-.order-group-head {
-  border-bottom: 1px solid black;
-  padding: 4px 16px;
-}
-
-.order-group-meta {
-  font-size: 18px;
-}
-
-.order-group-row {
-  padding: 16px;
-  text-align: center;
-}
-
-.order-image {
-  margin: 0 auto 16px;
-  max-width: 60%;
-  object-fit: cover;
-}
 
 /* FORM */
 .inline-inputs {
@@ -250,6 +225,10 @@ input:not(input.button) {
 
 .inline-inputs input {
   flex: 1;
+}
+
+.error:empty{
+  display: none;
 }
 
 /* MOBILE AND TABLET */
@@ -386,30 +365,5 @@ input:not(input.button) {
     flex: 1;
   }
 
-  /* ORDERS */
-  .order-group-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
-  .order-group-meta {
-    display: flex;
-    gap: 32px;
-  }
-
-  .order-price {
-    order: 1;
-  }
-
-  .order-group-row {
-    display: flex;
-    align-items: center;
-    text-align: left;
-  }
-
-  .order-image {
-    height: 280px;
-    width: 300px;
-  }
 }

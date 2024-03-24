@@ -99,27 +99,4 @@ class User{
         return "";
     }
 
-    public static function getOrders($userId) {
-        $conn = Connection::connect();
-
-        $stmt = $conn->prepare(SQL::$getUserOrders);
-        $stmt->execute([$userId]);
-        $orders = $stmt->fetchAll();
-
-        $conn = null;
-
-        return $orders;
-    }
-
-    public static function getTotalOrderPrice($userId, $orderId){
-        $conn = Connection::connect();
-
-        $stmt = $conn->prepare(SQL::$getTotalOrderPrice);
-        $stmt->execute([$userId, $orderId]);
-        $result = $stmt->fetch();
-
-        $conn = null;
-
-        return $result[0];
-    }
 }

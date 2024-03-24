@@ -1,1 +1,0 @@
-<p>Your basket is empty.</p>

@@ -13,15 +13,14 @@ if(!isset($_SESSION["loggedIn"])){
 $username = Utils::escape($_SESSION["username"]);
 $userId = Utils::escape($_SESSION["user_id"]);
 
-Components::pageHeader("$username's orders", ["style"], ["mobile-nav"]);
+Components::pageHeader("$username's Paths", ["style"], ["mobile-nav"]);
 
 ?>
 
-<h2><?php echo $username; ?>'s Orders</h2>
+<h2><?php echo $username; ?>'s Paths</h2>
 
 <?php
 
-Components::orderList($userId, User::getOrders($userId));
 Components::pageFooter();
 
 ?>

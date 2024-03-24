@@ -1,1 +1,0 @@
-<p>You haven't made any orders yet.</p>
