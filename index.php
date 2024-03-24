@@ -39,42 +39,59 @@ var polygon = L.polygon([
     [51.51, -0.047]
 ]).addTo(map);
 
-var markers = Array();
+var waypoints = [];
+
+var routingControl;
+
+var redMarker = L.AwesomeMarkers.icon({
+    icon: 'dot-circle-o',
+    prefix: 'fa',
+    markerColor: 'red'
+  });
+
       
 
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 circle.bindPopup("I am a circle.");
 polygon.bindPopup("I am a polygon.");
 
-var popup = L.popup()
-    .setLatLng([51.513, -0.09])
-    .setContent("I am a standalone popup.")
-    .openOn(map);
-
-    function onMapClick(e) {
-        alert("You clicked the map at " + e.latlng);
-    }
-
-map.on('click', onMapClick);
-
-var popup = L.popup();
-
 function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-        addMarker(e);
+
+    addMarker(e);
 
 }
 
 function addMarker(e){
     // Add marker to map at click location; add popup window
+
     var newMarker = new L.marker(e.latlng).addTo(map);
-    markers.push(newMarker.getLatLng());
 
 
-    var polyline = L.polyline(markers, {color: 'red'}).addTo(map);
+
+    
+    waypoints.push(e.latlng);
+
+    updateRoutingControl();
+
+ 
+
+}
+
+function updateRoutingControl() {
+    if (waypoints.length > 1) {
+        // Remove the previous routing control if it exists
+        if (routingControl) {
+            map.removeControl(routingControl);
+        }
+
+        // Create a new routing control with OSRM service
+        routingControl = L.Routing.control({
+            waypoints: waypoints,
+            router: L.Routing.osrmv1({
+                serviceUrl: 'https://router.project-osrm.org/route/v1'
+            })
+        }).addTo(map);
+    }
 }
 
 
@@ -126,7 +143,8 @@ var latlngs = [
     [51.517503, -0.065789],
     [51.521668,-0.046692]
 ]; 
-// 4. 
+
+
 
 
     </script>
