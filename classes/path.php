@@ -36,4 +36,26 @@ class Path{
         return $path;
     }
 
+
+    public static function updatePath($latlngs, $pathId){
+        $conn = Connection::connect();
+
+        $stmt = $conn->prepare(SQL::$updatePath);
+        $stmt->execute([$latlngs, $pathId]);
+
+        $conn = null;
+    }
+
+    public static function loadPath($pathId){
+        $conn = Connection::connect();
+
+        $stmt = $conn->prepare(SQL::$loadPath);
+        $stmt->execute([$pathId]);
+        $latlngs = $stmt->fetch();
+
+        $conn = null;
+
+        return $latlngs;
+    }
+
 }

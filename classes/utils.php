@@ -1,8 +1,7 @@
 <?php
 
 class Utils {
-  // public static $projectFilePath = "http://localhost/Leaflet-Project";
-  public static $projectFilePath = "http://192.168.0.14:8080/Leaflet-Project";
+  public static $projectFilePath = "http://localhost/Leaflet-Project";
   public static $defaultBookCover = "default.png";
 
   /**

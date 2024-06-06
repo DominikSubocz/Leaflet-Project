@@ -10,5 +10,7 @@ class SQL {
 
   public static $getPath = "SELECT * FROM walkroute.paths WHERE path_id = ?";
 
+  public static $updatePath = "UPDATE walkroute.paths SET latlngs = ? WHERE path_id = ?";
 
+  public static $loadPath = "SELECT latlngs FROM walkroute.paths WHERE path_id = ?";
 }

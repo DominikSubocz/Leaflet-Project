@@ -8,6 +8,13 @@
 </style>
 <p><?php echo 'Path name:', $pathName; ?></p>
 <p><?php echo 'Created on:', $dateCreated; ?></p>
+<div id="demo">
+    <p>Let AJAX change this text.</p>
+</div>
+
+<div id="demo2">
+    <p>abc</p>
+</div>
 <div id="map" style="width: 1500px; height: 600px;"></div>
 <script>
 
@@ -34,8 +41,37 @@ var polygon = L.polygon([
     [51.51, -0.047]
 ]).addTo(map);
 
+const searchParams = new URLSearchParams(window.location.search);
+
+const pathId = searchParams.get('id');
+
+function loadPath(){
+
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function(){
+    document.getElementById("demo2").innerHTML = this.responseText;
+}
+xhttp.open("GET", "update_path.php?action=load&path_id=" + pathId);
+xhttp.send();
+
+}
+
+
 var waypoints = [];
 
+loadPath();
+
+
+if(waypoints.length > 0){
+updateRoutingControl();
+
+
+}
+
+
+
+
+console.log(waypoints);
 var routingControl;
 
 var redMarker = L.AwesomeMarkers.icon({
@@ -61,15 +97,18 @@ function addMarker(e){
 
     var newMarker = new L.marker(e.latlng).addTo(map);
 
-
-
-    
     waypoints.push(e.latlng);
 
     updateRoutingControl();
+}
 
- 
-
+function updatePath(action){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        document.getElementById("demo").innerHTML = this.responseText;
+    }
+    xhttp.open("GET", "update_path.php?action=update" + "&waypoints=" + waypoints + "&path_id=" + pathId);
+    xhttp.send();
 }
 
 function updateRoutingControl() {
@@ -86,19 +125,10 @@ function updateRoutingControl() {
                 serviceUrl: 'https://router.project-osrm.org/route/v1'
             })
         }).addTo(map);
+        updatePath();
     }
 
-    var jsonData = JSON.stringify(waypoints);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "process_waypoints.php", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Data sent successfully");
-            // Handle response if needed
-        }
-    };
-    xhr.send(jsonData);
+
 }
 
 
