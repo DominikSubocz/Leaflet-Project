@@ -53,7 +53,7 @@ const xhttp = new XMLHttpRequest();
 xhttp.onload = function(){
     path = this.responseText;
     if(path != ""){
-        const array = path.split(",");
+        const array = path.split("|");
         console.log(array);
         updateRoutingControl();
     }
@@ -69,13 +69,6 @@ xhttp.send();
 
 loadPath();
 
-
-
-
-
-
-
-console.log(waypoints);
 var routingControl;
 
 var redMarker = L.AwesomeMarkers.icon({
