@@ -15,7 +15,12 @@ if($action == "update"){
 
     Path::updatePath($latlngs, $pathId);
 } else if ($action == "load"){
-    $path = Path::loadPath($pathId);
+    $paths = Path::loadPath($pathId);
 
-    var_dump($path);
+
+    
+    echo implode(",",$paths);
+
+
+
 }

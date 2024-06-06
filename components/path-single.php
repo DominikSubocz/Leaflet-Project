@@ -45,11 +45,19 @@ const searchParams = new URLSearchParams(window.location.search);
 
 const pathId = searchParams.get('id');
 
+var waypoints = [];
+
 function loadPath(){
 
 const xhttp = new XMLHttpRequest();
 xhttp.onload = function(){
-    document.getElementById("demo2").innerHTML = this.responseText;
+    path = this.responseText;
+    if(path != ""){
+        const array = path.split(",");
+        console.log(array);
+        updateRoutingControl();
+    }
+
 }
 xhttp.open("GET", "update_path.php?action=load&path_id=" + pathId);
 xhttp.send();
@@ -57,16 +65,12 @@ xhttp.send();
 }
 
 
-var waypoints = [];
+
 
 loadPath();
 
 
-if(waypoints.length > 0){
-updateRoutingControl();
 
-
-}
 
 
 
