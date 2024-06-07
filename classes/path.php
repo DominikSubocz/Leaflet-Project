@@ -40,10 +40,8 @@ class Path{
     public static function updatePath($latlngs, $pathId){
         $conn = Connection::connect();
 
-        $path = str_replace('),', ") | ", $latlngs);
-
         $stmt = $conn->prepare(SQL::$updatePath);
-        $stmt->execute([$path, $pathId]);
+        $stmt->execute([$latlngs, $pathId]);
 
         $conn = null;
     }

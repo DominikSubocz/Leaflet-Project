@@ -9,18 +9,13 @@ $action = $_REQUEST["action"];
 if($action == "update"){
     $waypoints = $_REQUEST["waypoints"];
 
+    Path::updatePath($waypoints, $pathId);
 
-    // var_dump("I will " . $action . " " . $waypoints . " Path ID: " . $pathId);
-    $latlngs = str_replace("LatLng","L.latLng",$waypoints);
+    var_dump($waypoints);
 
-    Path::updatePath($latlngs, $pathId);
 } else if ($action == "load"){
     $paths = Path::loadPath($pathId);
 
-
-    
-    echo implode(",",$paths);
-
-
+    echo($paths[0]);
 
 }
