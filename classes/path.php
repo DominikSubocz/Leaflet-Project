@@ -58,4 +58,15 @@ class Path{
         return $latlngs;
     }
 
+    public static function getPaths($userId){
+        $conn = Connection::connect();
+        $stmt = $conn->prepare(SQL::$loadPaths);
+        $stmt->execute($userId);
+
+        $paths = $stmt->fetchAll();
+
+        return $paths;
+
+    }
+
 }

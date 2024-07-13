@@ -63,7 +63,7 @@
 
       <nav class="page-navigation" id="nav-list">
         <ul class="nav-links">
-          <li><a href="book-list.php">Books</a></li>
+          <li><a href="path-list.php">Paths</a></li>
 
           <?php
 
