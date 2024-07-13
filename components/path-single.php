@@ -2,20 +2,24 @@
 
 <style>
 
-#map { height: 180px; }
+#map {
+    height: 600px; 
+    width:100%;
+}
 
 
 </style>
-<p><?php echo 'Path name:', $pathName; ?></p>
-<p><?php echo 'Created on:', $dateCreated; ?></p>
-<div id="demo">
-    <p>Let AJAX change this text.</p>
-</div>
 
-<div id="demo2">
-    <p>abc</p>
+<div>
+    <div class="path-info">
+        <h4>Path name:</h4> <p><?php echo $pathName; ?></p>
+        <div class="user-path-controls">
+            <button onclick="reversePath()" type="button">Reverse Path <i class="fa fa-exchange" aria-hidden="true"></i> </button>
+        </div>
+    </div>
+    <div id="map"></div>
+    <div id="controls"></div>
 </div>
-<div id="map" style="width: 1500px; height: 600px;"></div>
 <script>
 
 var map = L.map('map')
@@ -40,8 +44,6 @@ xhttp.onload = function(){
     const myObj = JSON.parse(this.responseText);
 
     if(myObj != ""){
-        document.getElementById("demo").innerHTML = myObj.name;
-
         console.log(myObj);
         waypoints = myObj;
         updateRoutingControl();
@@ -87,15 +89,14 @@ function addMarker(e){
 
 }
 
+
 function updatePath(action){
     const xhttp = new XMLHttpRequest();
-    xhttp.onload = function(){
-        document.getElementById("demo").innerHTML = this.responseText;
-    }
     const pathPoints = JSON.stringify(waypoints);
     xhttp.open("GET", "update_path.php?action=update" + "&waypoints=" + pathPoints + "&path_id=" + pathId);
     xhttp.send();
 }
+
 
 function updateRoutingControl() {
     if (waypoints.length > 1) {
@@ -111,10 +112,21 @@ function updateRoutingControl() {
                 serviceUrl: 'https://router.project-osrm.org/route/v1'
             })
         }).addTo(map);
+        routingControl._map = map;
+        var controlDiv = routingControl.onAdd(map);
+        document.getElementById('controls').appendChild(controlDiv);
     }
 
 
 }
+
+function reversePath(){
+    waypoints = waypoints.reverse();
+    updateRoutingControl();
+    updatePath();
+}
+
+
 
 
 
