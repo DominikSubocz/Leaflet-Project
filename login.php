@@ -21,16 +21,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $output = User::login();
 
         if(!$output){
-            header("Location: " . Utils::$projectFilePath . "/book-list.php");
+            header("Location: " . Utils::$projectFilePath . "/path-list.php");
         }
         } else if (isset($_POST["registerSubmit"])){
             $output = User::register();
-
-        if(!$output) {
-            header("Location: " . Utils::$projectFilePath . "/registration-success.php");
-
         }
-    }
 }
 
 Components::pageHeader("Login", ["style"], ["mobile-nav"]);

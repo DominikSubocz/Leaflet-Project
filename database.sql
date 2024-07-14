@@ -11,9 +11,11 @@ CREATE TABLE walkroute.users (
 
 CREATE TABLE walkroute.paths (
   path_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
   path_name TEXT NOT NULL,
   date_created DATETIME NOT NULL,
-  latlngs TEXT
+  latlngs TEXT,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 

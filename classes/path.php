@@ -8,7 +8,7 @@ require_once("classes/utils.php");
 class Path{
 
 
-    public static function createNewPath($pathName){
+    public static function createNewPath($pathName, $userId){
 
         $today = date('Y-m-d');
 
@@ -16,7 +16,7 @@ class Path{
         $conn = Connection::connect();
 
         $stmt = $conn->prepare(SQL::$createNewPath);
-        $stmt->execute([$pathName, $today]);
+        $stmt->execute([$pathName, $today, $userId]);
         $path = $stmt->fetch();
 
         return $conn->lastInsertId();
@@ -60,8 +60,8 @@ class Path{
 
     public static function getPaths($userId){
         $conn = Connection::connect();
-        $stmt = $conn->prepare(SQL::$loadPaths);
-        $stmt->execute($userId);
+        $stmt = $conn->prepare(SQL::$getPaths);
+        $stmt->execute([$userId]);
 
         $paths = $stmt->fetchAll();
 
