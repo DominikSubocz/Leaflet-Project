@@ -2,7 +2,7 @@
 
 class SQL {
 
-  public static $getUser = "SELECT user_id, username, password, user_role FROM bookstore.users WHERE username = ?";
+  public static $getUser = "SELECT user_id, username, password, user_role FROM users WHERE username = ?";
 
   public static $createUser = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
 
