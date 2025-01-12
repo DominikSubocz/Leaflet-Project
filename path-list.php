@@ -6,6 +6,10 @@ require "classes/components.php";
 require("classes/utils.php");
 require("classes/path.php");
 
+if ($_SESSION['loggedIn'] != true) {
+    header("Location: " . Utils::$projectFilePath . "/login.php");
+}
+
 Components::pageHeader("Path List", ["style"], ["mobile-nav"]);
 
 $userId = $_SESSION["user_id"];

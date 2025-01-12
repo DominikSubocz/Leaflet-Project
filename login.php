@@ -6,11 +6,6 @@ require("classes/components.php");
 
 require("classes/utils.php");
 
-if(isset($_SESSION["loggedIn"])){
-    header("Location: " . Utils::$projectFilePath . "/book-list.php");
-    
-}
-
 $output = "";
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
